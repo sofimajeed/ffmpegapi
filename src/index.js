@@ -242,65 +242,65 @@ cb(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname))
 
 
 //Video from Images
- var imglist = ""
+//  var imglist = ""
 
-var imglistFilePath = '../Public/Uploads/' + Date.now() + 'imglist.txt'
+// var imglistFilePath = '../Public/Uploads/' + Date.now() + 'imglist.txt'
 
-var imgoutputFilePath = Date.now() + 'output.mp4'
+// var imgoutputFilePath = Date.now() + 'output.mp4'
 
-const imgvideoFilter = function(req, file, cb) {
-      if (!file.originalname.match(/\.(jpg)$/)) {
-            req.fileValidationError = 'Only video files are allowed!';
-            return cb(new Error('Only video files are allowed!'), false);
-          }
-          cb(null, true);
-        };
+// const imgvideoFilter = function(req, file, cb) {
+//       if (!file.originalname.match(/\.(jpg)$/)) {
+//             req.fileValidationError = 'Only video files are allowed!';
+//             return cb(new Error('Only video files are allowed!'), false);
+//           }
+//           cb(null, true);
+//         };
 
-var imguploadVideos = multer({storage:storage,fileFilter:imgvideoFilter})
+// var imguploadVideos = multer({storage:storage,fileFilter:imgvideoFilter})
         
         
-app.post('/mergeimg',imguploadVideos.array('files',1000),(req,res) => {
-      if(req.files){
+// app.post('/mergeimg',imguploadVideos.array('files',1000),(req,res) => {
+//       if(req.files){
         
-              req.files.forEach(file => {
+//               req.files.forEach(file => {
             
-                      imglist += `file ${file.filename}`
-                      imglist += "\n"
+//                       imglist += `file ${file.filename}`
+//                       imglist += "\n"
             
-                  });
+//                   });
             
-                  var writeStream = fs.createWriteStream(imglistFilePath)
+//                   var writeStream = fs.createWriteStream(imglistFilePath)
             
-                  writeStream.write(imglist)
+//                   writeStream.write(imglist)
             
-                  writeStream.end()
+//                   writeStream.end()
             
-                  exec(`ffmpeg -i ${imglistFilePath} ${imgoutputFilePath}`, (error, stdout, stderr) => {
+//                   exec(`ffmpeg -i ${imglistFilePath} ${imgoutputFilePath}`, (error, stdout, stderr) => {
                 
-                          if (error) {
-                                  console.log(`error: ${error.message}`);
-                                  return;
-                              }
-                              else{
-                                      console.log("videos are successfully merged")
-                                  res.download(outputFilePath,(err) => {
-                                          if(err) throw err
+//                           if (error) {
+//                                   console.log(`error: ${error.message}`);
+//                                   return;
+//                               }
+//                               else{
+//                                       console.log("videos are successfully merged")
+//                                   res.download(outputFilePath,(err) => {
+//                                           if(err) throw err
                             
-                                          req.files.forEach(file => {
-                  fs.unlinkSync(file.path)                    
-              });
+//                                           req.files.forEach(file => {
+//                   fs.unlinkSync(file.path)                    
+//               });
 
-              fs.unlinkSync(imglistFilePath)
-              fs.unlinkSync(outputFilePath)
+//               fs.unlinkSync(imglistFilePath)
+//               fs.unlinkSync(outputFilePath)
 
 
 
-          })
-      }
+//           })
+//       }
 
-      })
-  }
-})
+//       })
+//   }
+// })
 
 
 
