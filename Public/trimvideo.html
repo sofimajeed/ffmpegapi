@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Multimedia Manipulation</title>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    />
+  </head>
+  <body>
+      <div class="container">
+          <br><br>
+          <h1 class="text-center">
+              Trim Video
+          </h1>
+          <br><br>
+          <form action="/trim" method="POST" enctype="multipart/form-data">
+            <div class="form-group">
+                <input type="file" class="form-control" name="file" required>
+            </div>
+            <div class="form-group">
+                <input type="number" class="form-control" name="start" required placeholder="start">
+            </div>
+            <div class="form-group">
+                <input type="number" class="form-control" name="end" required placeholder="end">
+            </div>
+            <div class="form-group">
+                <button class="btn btn-block btn-danger">
+                    Trim
+                </button>
+            </div>
+        </form>
+      </div>
+</body>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+</html>
