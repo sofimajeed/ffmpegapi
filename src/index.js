@@ -206,32 +206,32 @@ cb(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname))
 
 //Create Poster
 
-// var uploadVideo3 = multer({storage:storage})
+var uploadVideo3 = multer({storage:storage})
 
-//         app.post('/poster',uploadVideo3.single('file'),(req,res,next) => {
-//                 if(req.file){
-//                         var output = Date.now() + "output.jpg"
+        app.post('/poster',uploadVideo3.single('file'),(req,res,next) => {
+                if(req.file){
+                        var output = Date.now() + "output.jpg"
                 
-//                         exec(`ffmpeg -i ${req.file.path} -ss ${req.body.start} -vframes 1 -q:v 2 ${output}`, (error, stdout, stderr) => {
-//                                 if (error) {
-//                                         console.log(`error: ${error.message}`);
-//                                         return;
-//                                     }
-//                                     else{
-//                                             console.log("file is converted")
-//                                             res.download(output,(err) => {
-//                                                 if(err) throw err
+                        exec(`ffmpeg -i ${req.file.path} -ss ${req.body.start} -vframes 1 -q:v 2 ${output}`, (error, stdout, stderr) => {
+                                if (error) {
+                                        console.log(`error: ${error.message}`);
+                                        return;
+                                    }
+                                    else{
+                                            console.log("file is converted")
+                                            res.download(output,(err) => {
+                                                if(err) throw err
                                 
-//                                                 fs.unlinkSync(req.file.path)
-//                                                 fs.unlinkSync(output)
+                                                fs.unlinkSync(req.file.path)
+                                                fs.unlinkSync(output)
                                 
-//                                                 next()
+                                                next()
                                 
-//             })
-//         }
-//         })
-//     }
-// })
+            })
+        }
+        })
+    }
+})
 
 
 
