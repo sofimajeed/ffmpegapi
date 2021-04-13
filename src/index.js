@@ -28,32 +28,32 @@ cb(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname))
 //Mp42Mp3
 
 
-// var uploadMp4 = multer({storage:storage})
+var uploadMp4 = multer({storage:storage})
 
-//         app.post('/convert2mp3',uploadMp4.single('file'),(req,res,next) => {
-//                 if(req.file){
-//                         var output = Date.now() + "output.mp4"
+        app.post('/convert2mp3',uploadMp4.single('file'),(req,res,next) => {
+                if(req.file){
+                        var output = Date.now() + "output.mp4"
                 
-//                         exec(`ffmpeg -i ${req.file.path} ${output}`, (error, stdout, stderr) => {
-//                                 if (error) {
-//                                         console.log(`error: ${error.message}`);
-//                                         return;
-//                                     }
-//                                     else{
-//                                             console.log("file is converted")
-//                                             res.download(output,(err) => {
-//                                                 if(err) throw err
+                        exec(`ffmpeg -i ${req.file.path} ${output}`, (error, stdout, stderr) => {
+                                if (error) {
+                                        console.log(`error: ${error.message}`);
+                                        return;
+                                    }
+                                    else{
+                                            console.log("file is converted")
+                                            res.download(output,(err) => {
+                                                if(err) throw err
                                 
-//                                                 fs.unlinkSync(req.file.path)
-//                                                 fs.unlinkSync(output)
+                                                fs.unlinkSync(req.file.path)
+                                                fs.unlinkSync(output)
                                 
-//                                                 next()
+                                                next()
                                 
-//             })
-//         }
-//         })
-//     }
-// })
+            })
+        }
+        })
+    }
+})
 
 
 
