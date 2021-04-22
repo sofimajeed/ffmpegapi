@@ -30,63 +30,63 @@ cb(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname))
 //To Audio Formats
 
 
-// var uploadMp4 = multer({storage:storage})
+var uploadMp4 = multer({storage:storage})
 
-//         app.post('/convert2mp3',uploadMp4.single('file'),(req,res,next) => {
-//                 if(req.file){
-//                         var output = Date.now() + `output.${req.body.format}`
-//                         exec(`ffmpeg -i ${req.file.path} -filter:a "volume= ${req.body.volume}" ${output}`, (error, stdout, stderr) => {
-//                                 if (error) {
-//                                         console.log(`error: ${error.message}`);
-//                                         return;
-//                                     }
-//                                     else{
-//                                             console.log("file is converted")
-//                                             res.download(output,(err) => {
-//                                                 if(err) throw err
+        app.post('/convert2mp3',uploadMp4.single('file'),(req,res,next) => {
+                if(req.file){
+                        var output = Date.now() + `output.${req.body.format}`
+                        exec(`ffmpeg -i ${req.file.path} -filter:a "volume= ${req.body.volume}" ${output}`, (error, stdout, stderr) => {
+                                if (error) {
+                                        console.log(`error: ${error.message}`);
+                                        return;
+                                    }
+                                    else{
+                                            console.log("file is converted")
+                                            res.download(output,(err) => {
+                                                if(err) throw err
                                 
-//                                                 fs.unlinkSync(req.file.path)
-//                                                 fs.unlinkSync(output)
+                                                fs.unlinkSync(req.file.path)
+                                                fs.unlinkSync(output)
                                 
-//                                                 next()
+                                                next()
                                 
-//             })
-//         }
-//         })
-//     }
-// }) 
+            })
+        }
+        })
+    }
+}) 
 
 
 
 
 
 //Trim Video
-// var uploadVideo = multer({storage:storage})
+var uploadVideo = multer({storage:storage})
 
-//         app.post('/trim',uploadVideo.single('file'),(req,res,next) => {
-//                 if(req.file){
-//                         var output = Date.now() + "output.mp4"
+        app.post('/trim',uploadVideo.single('file'),(req,res,next) => {
+                if(req.file){
+                        var output = Date.now() + "output.mp4"
                 
-//                         exec(`ffmpeg -i ${req.file.path}  -ss ${req.body.start} -to ${req.body.end}  ${output}`, (error, stdout, stderr) => {
-//                                 if (error) {
-//                                         console.log(`error: ${error.message}`);
-//                                         return;
-//                                     }
-//                                     else{
-//                                             console.log("file is converted")
-//                                             res.download(output,(err) => {
-//                                                 if(err) throw err
+                        exec(`ffmpeg -i ${req.file.path}  -ss ${req.body.start} -to ${req.body.end}  ${output}`, (error, stdout, stderr) => {
+                                if (error) {
+                                        console.log(`error: ${error.message}`);
+                                        return;
+                                    }
+                                    else{
+                                            console.log("file is converted")
+                                            res.download(output,(err) => {
+                                                if(err) throw err
                                 
-//                                                 fs.unlinkSync(req.file.path)
-//                                                 fs.unlinkSync(output)
+                                                fs.unlinkSync(req.file.path)
+                                                fs.unlinkSync(output)
                                 
-//                                                 next()
+                                                next()
                                 
-//             })
-//         }
-//         })
-//     }
-// })
+            })
+        }
+        })
+    }
+})
 
 
 
@@ -96,71 +96,71 @@ cb(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname))
 
 
 //Make Gif
-// var uploadVideo2 = multer({storage:storage})
+var uploadVideo2 = multer({storage:storage})
 
-//         app.post('/gif',uploadVideo2.single('file'),(req,res,next) => {
-//                 if(req.file){
-//                         var output = Date.now() + "output.gif"
+        app.post('/gif',uploadVideo2.single('file'),(req,res,next) => {
+                if(req.file){
+                        var output = Date.now() + "output.gif"
         
-//                         exec(`ffmpeg -i ${req.file.path}  -ss ${req.body.start} -to ${req.body.end}  -vf "fps=10,scale=320:-2:flags=lanczos" ${output}`, (error, stdout, stderr) => {
-//                                 if (error) {
-//                                         console.log(`error: ${error.message}`);
-//                                         return;
-//                                     }
-//                                     else{
-//                                             console.log("file is converted")
-//                                             res.download(output,(err) => {
-//                                                 if(err) throw err
+                        exec(`ffmpeg -i ${req.file.path}  -ss ${req.body.start} -to ${req.body.end}  -vf "fps=10,scale=320:-2:flags=lanczos" ${output}`, (error, stdout, stderr) => {
+                                if (error) {
+                                        console.log(`error: ${error.message}`);
+                                        return;
+                                    }
+                                    else{
+                                            console.log("file is converted")
+                                            res.download(output,(err) => {
+                                                if(err) throw err
                                 
-//                                                 fs.unlinkSync(req.file.path)
-//                                                 fs.unlinkSync(output)
+                                                fs.unlinkSync(req.file.path)
+                                                fs.unlinkSync(output)
                                 
-//                                                 next()
+                                                next()
                                 
-//             })
-//         }
-//         })
-//     }
-// })
+            })
+        }
+        })
+    }
+})
 
 
 
 
 
 //Trim Video
-// var uploadVideo3 = multer({storage:storage})
+var uploadVideo3 = multer({storage:storage})
 
-//         app.post('/trimconcat',uploadVideo3.single('file'),(req,res,next) => {
-//                 if(req.file){
-//                         var output = Date.now() + "output.mp4"
+        app.post('/trimconcat',uploadVideo3.single('file'),(req,res,next) => {
+                if(req.file){
+                        var output = Date.now() + "output.mp4"
                 
-//                         exec(`ffmpeg -i ${req.file.path} -filter_complex \
-//                         "[0:v]trim=duration=3[av];[0:a]atrim=duration=3[aa];\
-//                          [0:v]trim=start=4:end=5,setpts=PTS-STARTPTS[bv];\
-//                          [0:a]atrim=start=4:end=5,asetpts=PTS-STARTPTS[ba];\
-//                          [av][bv]concat[cv];[aa][ba]concat=v=0:a=1[ca];\
-//                          [0:v]trim=start=8,setpts=PTS-STARTPTS[dv];\
-//                          [0:a]atrim=start=8,asetpts=PTS-STARTPTS[da];\
-//                          [cv][dv]concat[outv];[ca][da]concat=v=0:a=1[outa]" -map [outv] -map [outa] ${output}`, (error, stdout, stderr) => {
-//                                 if (error) {
-//                                         console.log(`error: ${error.message}`);
-//                                         return;
-//                                     }
-//                                     else{
-//                                             console.log("file is converted")
-//                                             res.download(output,(err) => {
-//                                                 if(err) throw err
+                        exec(`ffmpeg -i ${req.file.path} -filter_complex \
+                        "[0:v]trim=duration=3[av];[0:a]atrim=duration=3[aa];\
+                         [0:v]trim=start=4:end=5,setpts=PTS-STARTPTS[bv];\
+                         [0:a]atrim=start=4:end=5,asetpts=PTS-STARTPTS[ba];\
+                         [av][bv]concat[cv];[aa][ba]concat=v=0:a=1[ca];\
+                         [0:v]trim=start=8,setpts=PTS-STARTPTS[dv];\
+                         [0:a]atrim=start=8,asetpts=PTS-STARTPTS[da];\
+                         [cv][dv]concat[outv];[ca][da]concat=v=0:a=1[outa]" -map [outv] -map [outa] ${output}`, (error, stdout, stderr) => {
+                                if (error) {
+                                        console.log(`error: ${error.message}`);
+                                        return;
+                                    }
+                                    else{
+                                            console.log("file is converted")
+                                            res.download(output,(err) => {
+                                                if(err) throw err
                                 
-//                                                 fs.unlinkSync(req.file.path)
-//                                                 fs.unlinkSync(output)
+                                                fs.unlinkSync(req.file.path)
+                                                fs.unlinkSync(output)
                                 
-//                                                 next()
+                                                next()
                                 
-//             })
-//         }
-//         })
-//     }
-// })
+            })
+        }
+        })
+    }
+})
 
 
 
@@ -169,37 +169,37 @@ cb(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname))
 
 //Add Text
 
-// var uploadVideo4 = multer({storage:storage})
+var uploadVideo4 = multer({storage:storage})
 
-//         app.post('/text',uploadVideo4.single('file'),(req,res,next) => {
-//                 if(req.file){
-//                         var output = Date.now() + "output.mp4"
-// //-vf 'drawtext=textfile=/path/to/text.txt:x=0:y=0:fontfile=/path/to/font.ttf:fontsize=64:fontcolor=white:borderw=3:bordercolor=black:box=0:enable='between(t,23,31)''
+        app.post('/text',uploadVideo4.single('file'),(req,res,next) => {
+                if(req.file){
+                        var output = Date.now() + "output.mp4"
+//-vf 'drawtext=textfile=/path/to/text.txt:x=0:y=0:fontfile=/path/to/font.ttf:fontsize=64:fontcolor=white:borderw=3:bordercolor=black:box=0:enable='between(t,23,31)''
 
-//                         exec(`ffmpeg -i ${req.file.path} -vf "drawtext=text='Centered Text':x=(w-text_w)/2:y=(h-text_h)/2:fontsize=90:fontcolor=green:enable='between(t,5,8)" -c:a copy ${output}
-//                         `, (error, stdout, stderr) => {
-//                                 if (error) {
-//                                         console.log(`error: ${error.message}`);
-//                                         fs.unlinkSync(req.file.path)
-//                                         fs.unlinkSync(output)
-//                                         res.send('error occured')
-//                                         return;
-//                                     }
-//                                     else{
-//                                             console.log("file is converted")
-//                                             res.download(output,(err) => {
-//                                                 if(err) throw err
+                        exec(`ffmpeg -i ${req.file.path} -vf "drawtext=text='Centered Text':x=(w-text_w)/2:y=(h-text_h)/2:fontsize=90:fontcolor=green:enable='between(t,5,8)" -c:a copy ${output}
+                        `, (error, stdout, stderr) => {
+                                if (error) {
+                                        console.log(`error: ${error.message}`);
+                                        fs.unlinkSync(req.file.path)
+                                        fs.unlinkSync(output)
+                                        res.send('error occured')
+                                        return;
+                                    }
+                                    else{
+                                            console.log("file is converted")
+                                            res.download(output,(err) => {
+                                                if(err) throw err
                                 
-//                                                 fs.unlinkSync(req.file.path)
-//                                                 fs.unlinkSync(output)
+                                                fs.unlinkSync(req.file.path)
+                                                fs.unlinkSync(output)
                                 
-//                                                 next()
+                                                next()
                                 
-//             })
-//         }
-//         })
-//     }
-// })
+            })
+        }
+        })
+    }
+})
 
 
 
@@ -212,32 +212,32 @@ cb(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname))
 
 //Create Poster
 
-// var uploadVideo5 = multer({storage:storage})
+var uploadVideo5 = multer({storage:storage})
 
-//         app.post('/poster',uploadVideo5.single('file'),(req,res,next) => {
-//                 if(req.file){
-//                         var output = Date.now() + "output.jpg"
-//    //ffmpeg -y -i ${req.file.path} -filter_complex "fps=1/5,scale=320:180" thumbnail-%03d.jpg  (for thumbnails)
-//                         exec(`ffmpeg -i ${req.file.path} -ss ${req.body.start} -vframes 1 -q:v 2 ${output}`, (error, stdout, stderr) => {
-//                                 if (error) {
-//                                         console.log(`error: ${error.message}`);
-//                                         return;
-//                                     }
-//                                     else{
-//                                             console.log("file is converted")
-//                                             res.download(output,(err) => {
-//                                                 if(err) throw err
+        app.post('/poster',uploadVideo5.single('file'),(req,res,next) => {
+                if(req.file){
+                        var output = Date.now() + "output.jpg"
+   //ffmpeg -y -i ${req.file.path} -filter_complex "fps=1/5,scale=320:180" thumbnail-%03d.jpg  (for thumbnails)
+                        exec(`ffmpeg -i ${req.file.path} -ss ${req.body.start} -vframes 1 -q:v 2 ${output}`, (error, stdout, stderr) => {
+                                if (error) {
+                                        console.log(`error: ${error.message}`);
+                                        return;
+                                    }
+                                    else{
+                                            console.log("file is converted")
+                                            res.download(output,(err) => {
+                                                if(err) throw err
                                 
-//                                                 fs.unlinkSync(req.file.path)
-//                                                 fs.unlinkSync(output)
+                                                fs.unlinkSync(req.file.path)
+                                                fs.unlinkSync(output)
                                 
-//                                                 next()
+                                                next()
                                 
-//             })
-//         }
-//         })
-//     }
-// })
+            })
+        }
+        })
+    }
+})
 
 
 
@@ -280,65 +280,65 @@ var uploadVideo6 = multer({storage:storage})
 
 
 //Video from Images
-//  var imglist = ""
+ var imglist = ""
 
-// var imglistFilePath = '../Public/Uploads/' + Date.now() + 'imglist.txt'
+var imglistFilePath = '../Public/Uploads/' + Date.now() + 'imglist.txt'
 
-// var imgoutputFilePath = Date.now() + 'output.mp4'
+var imgoutputFilePath = Date.now() + 'output.mp4'
 
-// const imgvideoFilter = function(req, file, cb) {
-//       if (!file.originalname.match(/\.(jpg)$/)) {
-//             req.fileValidationError = 'Only video files are allowed!';
-//             return cb(new Error('Only video files are allowed!'), false);
-//           }
-//           cb(null, true);
-//         };
+const imgvideoFilter = function(req, file, cb) {
+      if (!file.originalname.match(/\.(jpg)$/)) {
+            req.fileValidationError = 'Only video files are allowed!';
+            return cb(new Error('Only video files are allowed!'), false);
+          }
+          cb(null, true);
+        };
 
-// var imguploadVideos = multer({storage:storage,fileFilter:imgvideoFilter})
+var imguploadVideos = multer({storage:storage,fileFilter:imgvideoFilter})
         
         
-// app.post('/mergeimg',imguploadVideos.array('files',1000),(req,res) => {
-//       if(req.files){
+app.post('/mergeimg',imguploadVideos.array('files',1000),(req,res) => {
+      if(req.files){
         
-//               req.files.forEach(file => {
+              req.files.forEach(file => {
             
-//                       imglist += `file ${file.filename}`
-//                       imglist += "\n"
+                      imglist += `file ${file.filename}`
+                      imglist += "\n"
             
-//                   });
+                  });
             
-//                   var writeStream = fs.createWriteStream(imglistFilePath)
+                  var writeStream = fs.createWriteStream(imglistFilePath)
             
-//                   writeStream.write(imglist)
+                  writeStream.write(imglist)
             
-//                   writeStream.end()
+                  writeStream.end()
             
-//                   exec(`ffmpeg -i ${imglistFilePath} ${imgoutputFilePath}`, (error, stdout, stderr) => {
+                  exec(`ffmpeg -i ${imglistFilePath} ${imgoutputFilePath}`, (error, stdout, stderr) => {
                 
-//                           if (error) {
-//                                   console.log(`error: ${error.message}`);
-//                                   return;
-//                               }
-//                               else{
-//                                       console.log("videos are successfully merged")
-//                                   res.download(outputFilePath,(err) => {
-//                                           if(err) throw err
+                          if (error) {
+                                  console.log(`error: ${error.message}`);
+                                  return;
+                              }
+                              else{
+                                      console.log("videos are successfully merged")
+                                  res.download(outputFilePath,(err) => {
+                                          if(err) throw err
                             
-//                                           req.files.forEach(file => {
-//                   fs.unlinkSync(file.path)                    
-//               });
+                                          req.files.forEach(file => {
+                  fs.unlinkSync(file.path)                    
+              });
 
-//               fs.unlinkSync(imglistFilePath)
-//               fs.unlinkSync(outputFilePath)
+              fs.unlinkSync(imglistFilePath)
+              fs.unlinkSync(outputFilePath)
 
 
 
-//           })
-//       }
+          })
+      }
 
-//       })
-//   }
-// })
+      })
+  }
+})
 
 
 
@@ -349,67 +349,65 @@ var uploadVideo6 = multer({storage:storage})
 
 //Video Merge
 
-// var list = ""
+var list = ""
 
-// var listFilePath = '../Public/Uploads/' + Date.now() + 'list.txt'
+var listFilePath = '../Public/Uploads/' + Date.now() + 'list.txt'
 
-// var outputFilePath = Date.now() + 'output.mp4'
+var outputFilePath = Date.now() + 'output.mp4'
 
-// const videoFilter = function(req, file, cb) {
-//       if (!file.originalname.match(/\.(mp4)$/)) {
-//             req.fileValidationError = 'Only video files are allowed!';
-//             return cb(new Error('Only video files are allowed!'), false);
-//           }
-//           cb(null, true);
-//         };
+const videoFilter = function(req, file, cb) {
+      if (!file.originalname.match(/\.(mp4)$/)) {
+            req.fileValidationError = 'Only video files are allowed!';
+            return cb(new Error('Only video files are allowed!'), false);
+          }
+          cb(null, true);
+        };
 
-// var uploadVideos = multer({storage:storage,fileFilter:videoFilter})
+var uploadVideos = multer({storage:storage,fileFilter:videoFilter})
         
         
-// app.post('/merge',uploadVideos.array('files',1000),(req,res) => {
-//       if(req.files){
+app.post('/merge',uploadVideos.array('files',1000),(req,res) => {
+      if(req.files){
         
-//               req.files.forEach(file => {
+              req.files.forEach(file => {
             
-//                       list += `file ${file.filename}`
-//                       list += "\n"
+                      list += `file ${file.filename}`
+                      list += "\n"
             
-//                   });
+                  });
             
-//                   var writeStream = fs.createWriteStream(listFilePath)
+                  var writeStream = fs.createWriteStream(listFilePath)
             
-//                   writeStream.write(list)
+                  writeStream.write(list)
             
-//                   writeStream.end()
+                  writeStream.end()
             
-//                   exec(`ffmpeg -safe 0 -f concat -i ${listFilePath} -c copy ${outputFilePath}`, (error, stdout, stderr) => {
+                  exec(`ffmpeg -safe 0 -f concat -i ${listFilePath} -c copy ${outputFilePath}`, (error, stdout, stderr) => {
                 
-//                           if (error) {
-//                                   console.log(`error: ${error.message}`);
-//                                   return;
-//                               }
-//                               else{
-//                                       console.log("videos are successfully merged")
-//                                   res.download(outputFilePath,(err) => {
-//                                           if(err) throw err
+                          if (error) {
+                                  console.log(`error: ${error.message}`);
+                                  return;
+                              }
+                              else{
+                                      console.log("videos are successfully merged")
+                                  res.download(outputFilePath,(err) => {
+                                          if(err) throw err
                             
-//                                           req.files.forEach(file => {
-//                   fs.unlinkSync(file.path)                    
-//               });
+                                          req.files.forEach(file => {
+                  fs.unlinkSync(file.path)                    
+              });
 
-//               fs.unlinkSync(listFilePath)
-//               fs.unlinkSync(outputFilePath)
-
-
-
-//           })
-//       }
-
-//       })
-//   }
-// })
+              fs.unlinkSync(listFilePath)
+              fs.unlinkSync(outputFilePath)
 
 
+
+          })
+      }
+
+      })
+  }
+})
 
 
 
@@ -420,59 +418,61 @@ var uploadVideo6 = multer({storage:storage})
 
 
 
-// //Video conversion
 
-// app.use(
-//     fileUpload({
-//         useTempFiles: true,
-//         tempFileDir: "/Public/Uploads/",
-//     })
-// );
-// ffmpeg.setFfmpegPath("C:/users/ffmpeg/bin/ffmpeg.exe");
 
-// ffmpeg.setFfprobePath("C:/users/ffmpeg/bin");
+//Video conversion
 
-// ffmpeg.setFlvtoolPath("C:/users/flvtool");
+app.use(
+    fileUpload({
+        useTempFiles: true,
+        tempFileDir: "/Public/Uploads/",
+    })
+);
+ffmpeg.setFfmpegPath("C:/users/ffmpeg/bin/ffmpeg.exe");
 
-// app.post("/convert", (req, res) => {
-//     let to = req.body.to;
-//     let file = req.files.file;
-//     let fileName = `output.${to}`;
-//     console.log(to);
-//     console.log(file);
+ffmpeg.setFfprobePath("C:/users/ffmpeg/bin");
+
+ffmpeg.setFlvtoolPath("C:/users/flvtool");
+
+app.post("/convert", (req, res) => {
+    let to = req.body.to;
+    let file = req.files.file;
+    let fileName = `output.${to}`;
+    console.log(to);
+    console.log(file);
   
-//     file.mv("../Public/Uploads" + file.name, function (err) {
-//       if (err) return res.sendStatus(500).send(err);
-//       console.log("File Uploaded successfully");
-//     });
+    file.mv("../Public/Uploads" + file.name, function (err) {
+      if (err) return res.sendStatus(500).send(err);
+      console.log("File Uploaded successfully");
+    });
   
 
-//     ffmpeg("../Public/Uploads" + file.name)
-//       .withOutputFormat(to)
-//       .on("end", function (stdout, stderr) {
-//         console.log("Finished");
-//         res.download(__dirname + fileName, function (err) {
-//           if (err) throw err;
+    ffmpeg("../Public/Uploads" + file.name)
+      .withOutputFormat(to)
+      .on("end", function (stdout, stderr) {
+        console.log("Finished");
+        res.download(__dirname + fileName, function (err) {
+          if (err) throw err;
   
-//           fs.unlink(__dirname + fileName, function (err) {
-//             if (err) throw err;
-//             console.log("File deleted");
-//           });
-//         });
-//         fs.unlink("../Public/Uploads" + file.name, function (err) {
-//           if (err) throw err;
-//           console.log("File deleted");
-//         });
-//       })
-//       .on("error", function (err) {
-//         console.log("an error happened: " + err.message);
-//         fs.unlink("../Public/Uploads" + file.name, function (err) {
-//           if (err) throw err;
-//           console.log("File deleted");
-//         });
-//       })
-//       .saveToFile(__dirname + fileName);
-//   });
+          fs.unlink(__dirname + fileName, function (err) {
+            if (err) throw err;
+            console.log("File deleted");
+          });
+        });
+        fs.unlink("../Public/Uploads" + file.name, function (err) {
+          if (err) throw err;
+          console.log("File deleted");
+        });
+      })
+      .on("error", function (err) {
+        console.log("an error happened: " + err.message);
+        fs.unlink("../Public/Uploads" + file.name, function (err) {
+          if (err) throw err;
+          console.log("File deleted");
+        });
+      })
+      .saveToFile(__dirname + fileName);
+  });
 
 
 
