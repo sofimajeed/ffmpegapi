@@ -23,37 +23,38 @@ cb(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname))
 }
 })
 
+//https://ostechnix.com/20-ffmpeg-commands-beginners/ (webiste)
 
 
-//Mp42Mp3
+
+//To Audio Formats
 
 
-var uploadMp4 = multer({storage:storage})
+// var uploadMp4 = multer({storage:storage})
 
-        app.post('/convert2mp3',uploadMp4.single('file'),(req,res,next) => {
-                if(req.file){
-                        var output = Date.now() + "output.mp4"
-                
-                        exec(`ffmpeg -i ${req.file.path} ${output}`, (error, stdout, stderr) => {
-                                if (error) {
-                                        console.log(`error: ${error.message}`);
-                                        return;
-                                    }
-                                    else{
-                                            console.log("file is converted")
-                                            res.download(output,(err) => {
-                                                if(err) throw err
+//         app.post('/convert2mp3',uploadMp4.single('file'),(req,res,next) => {
+//                 if(req.file){
+//                         var output = Date.now() + `output.${req.body.format}`
+//                         exec(`ffmpeg -i ${req.file.path} -filter:a "volume= ${req.body.volume}" ${output}`, (error, stdout, stderr) => {
+//                                 if (error) {
+//                                         console.log(`error: ${error.message}`);
+//                                         return;
+//                                     }
+//                                     else{
+//                                             console.log("file is converted")
+//                                             res.download(output,(err) => {
+//                                                 if(err) throw err
                                 
-                                                fs.unlinkSync(req.file.path)
-                                                fs.unlinkSync(output)
+//                                                 fs.unlinkSync(req.file.path)
+//                                                 fs.unlinkSync(output)
                                 
-                                                next()
+//                                                 next()
                                 
-            })
-        }
-        })
-    }
-})
+//             })
+//         }
+//         })
+//     }
+// }) 
 
 
 
@@ -100,7 +101,7 @@ var uploadMp4 = multer({storage:storage})
 //         app.post('/gif',uploadVideo2.single('file'),(req,res,next) => {
 //                 if(req.file){
 //                         var output = Date.now() + "output.gif"
-                
+        
 //                         exec(`ffmpeg -i ${req.file.path}  -ss ${req.body.start} -to ${req.body.end}  -vf "fps=10,scale=320:-2:flags=lanczos" ${output}`, (error, stdout, stderr) => {
 //                                 if (error) {
 //                                         console.log(`error: ${error.message}`);
@@ -173,11 +174,15 @@ var uploadMp4 = multer({storage:storage})
 //         app.post('/text',uploadVideo4.single('file'),(req,res,next) => {
 //                 if(req.file){
 //                         var output = Date.now() + "output.mp4"
-                
-//                         exec(`ffmpeg -i ${req.file.path} -vf "drawtext=text='Centered Text':x=(w-text_w)/2:y=(h-text_h)/2:fontsize=24:fontcolor=white" -c:a copy ${output}
+// //-vf 'drawtext=textfile=/path/to/text.txt:x=0:y=0:fontfile=/path/to/font.ttf:fontsize=64:fontcolor=white:borderw=3:bordercolor=black:box=0:enable='between(t,23,31)''
+
+//                         exec(`ffmpeg -i ${req.file.path} -vf "drawtext=text='Centered Text':x=(w-text_w)/2:y=(h-text_h)/2:fontsize=90:fontcolor=green:enable='between(t,5,8)" -c:a copy ${output}
 //                         `, (error, stdout, stderr) => {
 //                                 if (error) {
 //                                         console.log(`error: ${error.message}`);
+//                                         fs.unlinkSync(req.file.path)
+//                                         fs.unlinkSync(output)
+//                                         res.send('error occured')
 //                                         return;
 //                                     }
 //                                     else{
@@ -207,15 +212,51 @@ var uploadMp4 = multer({storage:storage})
 
 //Create Poster
 
-var uploadVideo3 = multer({storage:storage})
+// var uploadVideo5 = multer({storage:storage})
 
-        app.post('/poster',uploadVideo3.single('file'),(req,res,next) => {
+//         app.post('/poster',uploadVideo5.single('file'),(req,res,next) => {
+//                 if(req.file){
+//                         var output = Date.now() + "output.jpg"
+//    //ffmpeg -y -i ${req.file.path} -filter_complex "fps=1/5,scale=320:180" thumbnail-%03d.jpg  (for thumbnails)
+//                         exec(`ffmpeg -i ${req.file.path} -ss ${req.body.start} -vframes 1 -q:v 2 ${output}`, (error, stdout, stderr) => {
+//                                 if (error) {
+//                                         console.log(`error: ${error.message}`);
+//                                         return;
+//                                     }
+//                                     else{
+//                                             console.log("file is converted")
+//                                             res.download(output,(err) => {
+//                                                 if(err) throw err
+                                
+//                                                 fs.unlinkSync(req.file.path)
+//                                                 fs.unlinkSync(output)
+                                
+//                                                 next()
+                                
+//             })
+//         }
+//         })
+//     }
+// })
+
+
+
+
+// Remove Audio
+
+var uploadVideo6 = multer({storage:storage})
+
+        app.post('/removeaudio',uploadVideo6.single('file'),(req,res,next) => {
                 if(req.file){
-                        var output = Date.now() + "output.jpg"
-                
-                        exec(`ffmpeg -i ${req.file.path} -ss ${req.body.start} -vframes 1 -q:v 2 ${output}`, (error, stdout, stderr) => {
+                        var output = Date.now() + "output.mp4"
+
+                        exec(`ffmpeg -i ${req.file.path} -an ${output}
+                        `, (error, stdout, stderr) => {
                                 if (error) {
                                         console.log(`error: ${error.message}`);
+                                        fs.unlinkSync(req.file.path)
+                                        fs.unlinkSync(output)
+                                        res.send('error occured')
                                         return;
                                     }
                                     else{
@@ -233,10 +274,6 @@ var uploadVideo3 = multer({storage:storage})
         })
     }
 })
-
-
-
-
 
 
 
@@ -438,6 +475,36 @@ var uploadVideo3 = multer({storage:storage})
 //   });
 
 
+
+
+
+
+
+var uploadMp7 = multer({storage:storage})
+
+        app.post('/convert',uploadMp7.single('file'),(req,res,next) => {
+                if(req.file){
+                        var output = Date.now() + `output.${req.body.to}`
+                        exec(`ffmpeg -i ${req.file.path} -filter:a "volume= ${req.body.volume}" ${output}`, (error, stdout, stderr) => {
+                                if (error) {
+                                        console.log(`error: ${error.message}`);
+                                        return;
+                                    }
+                                    else{
+                                            console.log("file is converted")
+                                            res.download(output,(err) => {
+                                                if(err) throw err
+                                
+                                                fs.unlinkSync(req.file.path)
+                                                fs.unlinkSync(output)
+                                
+                                                next()
+                                
+            })
+        }
+        })
+    }
+}) 
 
 
 
