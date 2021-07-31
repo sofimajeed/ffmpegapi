@@ -13,7 +13,6 @@ const ffmpeg = require("fluent-ffmpeg");
 app.use(express.static(pathtoPublic));
 
 
-
 var storage = multer.diskStorage({
   destination: function (req, file, cb) {
         cb(null, '../Public/Uploads')
@@ -24,7 +23,6 @@ cb(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname))
 })
 
 //https://ostechnix.com/20-ffmpeg-commands-beginners/ (webiste)
-
 
 
 //To Audio Formats
@@ -59,11 +57,11 @@ var uploadMp4 = multer({storage:storage})
 
 
 
-
 //Trim Video
 var uploadVideo = multer({storage:storage})
 
         app.post('/trim',uploadVideo.single('file'),(req,res,next) => {
+            req.on
                 if(req.file){
                         var output = Date.now() + "output.mp4"
                 
@@ -127,7 +125,7 @@ var uploadVideo2 = multer({storage:storage})
 
 
 
-//Trim Video
+//Trim and concat Video
 var uploadVideo3 = multer({storage:storage})
 
         app.post('/trimconcat',uploadVideo3.single('file'),(req,res,next) => {
@@ -174,9 +172,12 @@ var uploadVideo4 = multer({storage:storage})
         app.post('/text',uploadVideo4.single('file'),(req,res,next) => {
                 if(req.file){
                         var output = Date.now() + "output.mp4"
-//-vf 'drawtext=textfile=/path/to/text.txt:x=0:y=0:fontfile=/path/to/font.ttf:fontsize=64:fontcolor=white:borderw=3:bordercolor=black:box=0:enable='between(t,23,31)''
-
-                        exec(`ffmpeg -i ${req.file.path} -vf "drawtext=text='Centered Text':x=(w-text_w)/2:y=(h-text_h)/2:fontsize=90:fontcolor=green:enable='between(t,5,8)" -c:a copy ${output}
+                        exec(`
+                        ffmpeg 
+                        -i 
+                        ${req.file.path} 
+                        -vf 
+                        "[in]drawtext=text='Centered Text':x=(w-text_w)/2:y=(h-text_h)/2:fontsize=90:fontcolor=green:enable='between(t,5,8)',drawtext=text='Centered Text':x=(w-text_w)/2:y=(h-text_h)/2:fontsize=90:fontcolor=green:enable='between(t,3,6)'[out]"-c:a copy ${output}
                         `, (error, stdout, stderr) => {
                                 if (error) {
                                         console.log(`error: ${error.message}`);
@@ -505,8 +506,6 @@ var uploadMp7 = multer({storage:storage})
         })
     }
 }) 
-
-
 
 
 
